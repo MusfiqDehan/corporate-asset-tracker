@@ -6,7 +6,7 @@ import ConfirmRemovalModal from "./ConfirmRemovalModal";
 const EmployeeList = (props) => {
     const employees = props.employees;
     return (
-        <Table dark>
+        <Table>
             <thead>
                 <tr>
                     <th>Name</th>
