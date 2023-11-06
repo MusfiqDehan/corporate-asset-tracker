@@ -1,4 +1,3 @@
-import React from "react";
 import { Table } from "reactstrap";
 import NewEmployeeModal from "./NewEmployeeModal";
 import ConfirmRemovalModal from "./ConfirmRemovalModal";
