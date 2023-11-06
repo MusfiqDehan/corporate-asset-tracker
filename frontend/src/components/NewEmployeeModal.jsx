@@ -1,55 +1,49 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import NewEmployeeForm from "./NewEmployeeForm";
 
-class NewEmployeeModal extends Component {
-    state = {
-        modal: false,
+const NewEmployeeModal = (props) => {
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => {
+        setModal(!modal);
     };
 
-    toggle = () => {
-        this.setState((previous) => ({
-            modal: !previous.modal,
-        }));
-    };
+    const create = props.create;
 
-    render() {
-        const create = this.props.create;
+    var title = "Editing Employee";
+    var button = <Button onClick={toggle}>Edit</Button>;
+    if (create) {
+        title = "Creating New Employee";
 
-        var title = "Editing Employee";
-        var button = <Button onClick={this.toggle}>Edit</Button>;
-        if (create) {
-            title = "Creating New Employee";
-
-            button = (
-                <Button
-                    color="primary"
-                    className="float-right"
-                    onClick={this.toggle}
-                    style={{ minWidth: "200px" }}
-                >
-                    Create New
-                </Button>
-            );
-        }
-
-        return (
-            <Fragment>
-                {button}
-                <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
-
-                    <ModalBody>
-                        <NewEmployeeForm
-                            resetState={this.props.resetState}
-                            toggle={this.toggle}
-                            employee={this.props.employee}
-                        />
-                    </ModalBody>
-                </Modal>
-            </Fragment>
+        button = (
+            <Button
+                color="primary"
+                className="float-right"
+                onClick={toggle}
+                style={{ minWidth: "200px" }}
+            >
+                Create New
+            </Button>
         );
     }
-}
+
+    return (
+        <>
+            {button}
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>{title}</ModalHeader>
+
+                <ModalBody>
+                    <NewEmployeeForm
+                        resetState={props.resetState}
+                        toggle={toggle}
+                        employee={props.employee}
+                    />
+                </ModalBody>
+            </Modal>
+        </>
+    );
+};
 
 export default NewEmployeeModal;
